@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const Header = ({ text }) => {
     return (
-        <header text={true}>
+        <header text="Hello world">
             <div className="container">
                 <h2>{text}</h2>
             </div>
