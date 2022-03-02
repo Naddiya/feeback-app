@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 
 const Header = ({ text }) => {
+    const headerStyles = { backgroundColor: 'blue', color: 'red' };
     return (
-        <header text="Hello world">
+        <header text={text} style={headerStyles}>
             <div className="container">
                 <h2>{text}</h2>
             </div>
@@ -12,7 +13,9 @@ const Header = ({ text }) => {
 };
 
 Header.defaultProps = {
-    text: 'Feedback UI'
+    text: 'Feedback UI',
+    bgColor: 'rgba(0,0,0,0.4',
+    textColor: '#ff6a95'
 };
 
 Header.propTypes = {
