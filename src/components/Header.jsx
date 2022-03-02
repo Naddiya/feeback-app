@@ -26,7 +26,6 @@ Header.propTypes = {
     text: PropTypes.string,
     bgColor: PropTypes.string,
     txtColor: PropTypes.string
-
 };
 
 export default Header;
