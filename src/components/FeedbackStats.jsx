@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const FeedbackStats = ({ feedback }) => {
-    // calculate reating average
+    // calculate rating average
     let average = feedback.reduce((acc, curr) => {
         return acc + curr.rating;
     }, 0) / feedback.length;
