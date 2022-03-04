@@ -54,7 +54,8 @@ export const FeebackProvider = ({ children }) => {
             deleteFeedback,
             editFeedback,
             feedbackEdit,
-            updateFeedback
+            updateFeedback,
+            isLoading
         }}>
         {children}
     </FeedbackContext.Provider>;
