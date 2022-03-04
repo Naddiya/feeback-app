@@ -28,8 +28,8 @@ export const FeebackProvider = ({ children }) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body : JSON.stringify(newFeedback)
-        })
+            body: JSON.stringify(newFeedback)
+        });
 
         const data = await response.json();
         setFeedback([data, ...feedback]);
@@ -40,15 +40,26 @@ export const FeebackProvider = ({ children }) => {
         if (window.confirm('Are you sur you want to delete ?')) {
             await fetch(`/feedback/${id}`, {
                 method: 'DELETE'
-            })
-            
+            });
+
             setFeedback(feedback.filter(item => item.id !== id));
         }
     };
 
-    const updateFeedback = (id, updItem) => {
+    const updateFeedback = async (id, updItem) => {
+        const response = await fetch(`/feedback/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updItem)
+        });
+
+        const data = await response.json();
+        console.log(data);
+
         setFeedback(
-            feedback.map((item) => (item.id === id ? { ...item, ...updItem } : item))
+            feedback.map((item) => item.id === id ? { ...item, ...data } : item)
         );
     };
 
