@@ -10,30 +10,30 @@ const FeedbackForm = () => {
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [message, setMessage] = useState('');
 
-    const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
+    const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext);
 
     useEffect(() => {
         if (feedbackEdit.edit === true) {
             setBtnDisabled(false);
+            console.log(feedbackEdit);
             setText(feedbackEdit.item.text);
             setRating(feedbackEdit.item.rating);
         }
     }, [feedbackEdit]);
 
     const handleTextChange = (e) => {
-        const value = e.target.value;
-
-        if (value === '') {
+        const text = e.target.value;
+        if (text === '') {
             setBtnDisabled(true);
             setMessage(null);
-        } else if (value !== '' && value.trim().length <= 10) {
+        } else if (text !== '' && text.trim().length <= 10) {
             setMessage('Text must be at least 10 characters');
             setBtnDisabled(true);
         } else {
             setMessage(null);
             setBtnDisabled(false);
         }
-        setText(value);
+        setText(text);
     };
 
     const handleSubmit = (e) => {
@@ -43,7 +43,15 @@ const FeedbackForm = () => {
                 text,
                 rating
             };
+
+            if (feedbackEdit === true) {
+                updateFeedback(feedbackEdit.item.id, newFeedBack);
+            } else {
+                addFeedback(newFeedBack)
+            }
+
             addFeedback(newFeedBack);
+            setText('')
         }
     };
 
@@ -57,6 +65,7 @@ const FeedbackForm = () => {
                         type="text"
                         placeholder="Write a review"
                         onChange={handleTextChange}
+                        value={text}
                     />
                     <Button type="submit" isDisabled={btnDisabled}>Send</Button>
                 </div>

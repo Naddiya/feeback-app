@@ -8,17 +8,17 @@ export const FeebackProvider = ({ children }) => {
         {
             id: 1,
             rating: 10,
-            text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem cumque eius perspiciatis tempora quas fuga delectus ullam similique? Neque nemo, numquam eius temporibus eaque placeat fuga nostrum consequatur asperiores maxime.'
+            text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.'
         },
         {
             id: 2,
             rating: 8,
-            text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem cumque eius perspiciatis tempora quas fuga delectus ullam similique? Neque nemo, numquam eius temporibus eaque placeat fuga nostrum consequatur asperiores maxime.'
+            text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.'
         },
         {
             id: 3,
             rating: 1,
-            text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem cumque eius perspiciatis tempora quas fuga delectus ullam similique? Neque nemo, numquam eius temporibus eaque placeat fuga nostrum consequatur asperiores maxime.'
+            text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.'
         },
     ]);
     const [feedbackEdit, setFeedbackEdit] = useState({
@@ -37,6 +37,12 @@ export const FeebackProvider = ({ children }) => {
         }
     };
 
+    const updateFeedback = (id, updItem) => {
+        setFeedback(
+            feedback.map((item) => (item.id === id ? { ...item, ...updItem } : item))
+        );
+    };
+
     const editFeedback = (item) => {
         setFeedbackEdit({
             item,
@@ -50,7 +56,8 @@ export const FeebackProvider = ({ children }) => {
             addFeedback,
             deleteFeedback,
             editFeedback,
-            feedbackEdit
+            feedbackEdit,
+            updateFeedback
         }}>
         {children}
     </FeedbackContext.Provider>;
