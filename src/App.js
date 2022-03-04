@@ -12,7 +12,7 @@ import FeedbackStats from "./components/FeedbackStats";
 import FeedbackForm from "./components/FeedbackForm";
 import AboutPage from "./pages/AboutPage";
 import AboutIconLink from "./components/AboutIconLink";
-import Posts from './components/Posts';
+import { FeebackProvider } from './context/FeedbackContext';
 
 import feedbackData from "./data/feedbackData";
 
@@ -31,6 +31,8 @@ function App() {
     };
 
     return (
+        <FeebackProvider>
+
         <Router>
             <Header />
             <div className="container">
@@ -46,11 +48,11 @@ function App() {
                     }>
                     </Route>
                     <Route path='/about' element={<AboutPage />} />
-                    <Route path='/post/*' element={<Posts />} />
                 </Routes>
                 <AboutIconLink />
             </div>
         </Router>
+        </FeebackProvider>
     );
 }
 
