@@ -44,13 +44,12 @@ const FeedbackForm = () => {
                 rating
             };
 
-            if (feedbackEdit === true) {
+            if (feedbackEdit.edit === true) {
                 updateFeedback(feedbackEdit.item.id, newFeedBack);
             } else {
                 addFeedback(newFeedBack)
             }
 
-            addFeedback(newFeedBack);
             setText('')
         }
     };
