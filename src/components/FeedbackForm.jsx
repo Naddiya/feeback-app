@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Card from './shared/Card';
 import Button from './shared/Button';
 import RatingSelect from './RatingSelect';
@@ -9,24 +9,31 @@ const FeedbackForm = () => {
     const [rating, setRating] = useState(10);
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [message, setMessage] = useState('');
-    
-    const { addFeedback } = useContext(FeedbackContext);
-    
-    const handleTextChange = (e) => {
-        const text = e.target.value;
 
-        if (text === '') {
-            setBtnDisabled(true);
-            setMessage(null);
-        } else if (text !== '' && text.trim().length <= 10) {
-            setBtnDisabled(true);
-            setMessage('Text must be at least 10 characters');
-        } else {
+    const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
+
+    useEffect(() => {
+        if (feedbackEdit.edit === true) {
             setBtnDisabled(false);
-            setMessage(null);
+            setText(feedbackEdit.item.text);
+            setRating(feedbackEdit.item.rating);
         }
+    }, [feedbackEdit]);
 
-        setText(text);
+    const handleTextChange = (e) => {
+        const value = e.target.value;
+
+        if (value === '') {
+            setBtnDisabled(true);
+            setMessage(null);
+        } else if (value !== '' && value.trim().length <= 10) {
+            setMessage('Text must be at least 10 characters');
+            setBtnDisabled(true);
+        } else {
+            setMessage(null);
+            setBtnDisabled(false);
+        }
+        setText(value);
     };
 
     const handleSubmit = (e) => {
